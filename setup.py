@@ -11,6 +11,6 @@ setup(
   download_url='https://github.com/chatfirst/chatfirst/tarball/v0.1.0',
   license='LICENSE.txt',
   install_requires=[
-        "requests==2.10.0",
+        "requests>=2.10.0",
     ],
 )
