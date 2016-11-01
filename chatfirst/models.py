@@ -2,14 +2,38 @@ import json
 
 
 class ActionResponse(object):
+    """
+    Main class defining ActionResponse entity
+
+    :param data: serialized object
+    :type data: dict
+    """
     def __init__(self, data={}):
+        #: ignore this parameter
         self.count = data['Count'] if 'Count' in data.keys() else None
+
+        #: data["Messages"],
+        #: list of messages to return as text messages
         self.messages = data['Messages'] if 'Messages' in data.keys() else []
+
+        #: data["ForcedState"],
+        #: forced transition to state (useful trick for scoped scenarios and error handling)
         self.forced = data['ForcedState'] if 'ForcedState' in data.keys() else None
+
+        #: data["ForcedKeyboard"],
+        #: keys to be shown to user
         self.keyboard = data['ForcedKeyboard'] if 'ForcedKeyboard' in data.keys() else None
+
+        #: data["Entities"],
+        #: list of LinkedEntity objects
         self.entities = [LinkedEntity(item) for item in data['Entities']] if 'Entities' in data.keys() else []
 
     def to_json(self):
+        """
+        Serialize object to json dict
+
+        :return: dict
+        """
         res = dict()
         res['Count'] = self.count
         res['Messages'] = self.messages
@@ -28,16 +52,39 @@ class ErrorResponse(ActionResponse):
 
 
 class LinkedEntity:
+    """
+    The way to show images in bot.
+    Every object will be rendered as gallery or set of image messages.
+
+    :param data: serialized object
+    :type data: dict
+    """
     def __init__(self, data={}):
+        #: data["Name"],
+        #: name of image
         self.name = data['Name'] if 'Name' in data.keys() else None
+
+        #: data["Description"],
+        #: description of image
         self.desc = data['Description'] if 'Description' in data.keys() else None
+
+        #: data["ImageUrl"],
+        #: url of image
         self.url = data['ImageUrl'] if 'ImageUrl' in data.keys() else None
+
+        #: data["EntityOptions"],
+        #: keys to be shown to user
         self.options = data['EntityOptions'] if 'EntityOptions' in data.keys() else []
 
     def __str__(self):
         return json.dumps(self.to_json())
 
     def to_json(self):
+        """
+        Serialize object to json dict
+
+        :return: dict
+        """
         res = dict()
         res['Handle'] = ''
         res['Name'] = self.name
@@ -50,14 +97,33 @@ class LinkedEntity:
 class Bot:
     """
     Main class defining Bot entity
+
+    :param data: serialized object
+    :type data: dict
     """
     def __init__(self, data={}):
+        #: data["name"],
+        #: short name of bot
         self.name = data['name'] if 'name' in data.keys() else None
+
+        #: data["language"],
+        #: 0 - Russian, 1 - English
         self.language = data['language'] if 'language' in data.keys() else None
+
+        #: data["fancy_name"],
+        #: long name of bot
         self.fancy_name = data['fancy_name'] if 'fancy_name' in data.keys() else None
+
+        #: data["scenario"],
+        #: scenario of bot
         self.scenario = data['scenario'] if 'scenario' in data.keys() else None
 
     def to_json(self):
+        """
+        Serialize object to json dict
+
+        :return: dict
+        """
         data = dict()
         data['name'] = self.name
         data['language'] = self.language
@@ -78,9 +144,6 @@ class Bot:
 
 
 class Channel:
-    """
-    Main class defining Channel entity
-    """
     def __init__(self, data={}):
         self.token = data['Token'] if 'Token' in data.keys() else None
         self.name = data['Name'] if 'Name' in data.keys() else None
@@ -111,16 +174,39 @@ class Channel:
 
 class Message:
     """
-    Main class defining Message entity
+    Use this class if you want to integrate your own channel and use talk method.
+    Chatfirst platform accepts incomming talk requests with special json object:
+
+    :param data: serialized object
+    :type data: dict
     """
     def __init__(self, data={}):
+        #: data["InterlocutorId"],
+        #: internal id of talking user
         self.id_ = data['InterlocutorId'] if 'InterlocutorId' in data.keys() else None
+
+        #: data["Text"],
+        #: text message that user sent
         self.text = data['Text'] if 'Text' in data.keys() else None
+
+        #: data["Username"],
+        #: username of talking user
         self.username = data['Username'] if 'Username' in data.keys() else None
+
+        #: data["FirstName"],
+        #: first name of talking user
         self.first_name = data['FirstName'] if 'FirstName' in data.keys() else None
+
+        #: data["LastName"],
+        #: last name of talking user
         self.last_name = data['LastName'] if 'LastName' in data.keys() else None
 
     def to_json(self):
+        """
+        Serialize object to json dict
+
+        :return: dict
+        """
         data = dict()
         data['InterlocutorId'] = self.id_
         data['Text'] = self.text
