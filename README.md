@@ -12,4 +12,4 @@ often looks like this::
     client = Chatfirst(your_chatfirst_user_token)
     my_bots = client.bots_list()
 
-See more in documentation
+See more in [documentation](http://chatfirst.readthedocs.io/en/latest)
