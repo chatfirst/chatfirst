@@ -1,7 +1,18 @@
 Welcome to Chatfirst Python Client's documentation!
 ===================================================
 
-Chatfirst Python Client provides simple interface to `Chatfirst API <https://api.chatfirst.co/swagger>`_. Typical usage::
+Chatfirst Python Client provides simple interface to `Chatfirst API <https://api.chatfirst.co/swagger>`_
+
+
+Installation
+------------
+::
+
+    pip install chatfirst
+
+Quickstart
+----------
+::
 
     #!/usr/bin/env python
 
@@ -10,9 +21,8 @@ Chatfirst Python Client provides simple interface to `Chatfirst API <https://api
     client = Chatfirst(your_chatfirst_user_token)
     my_bots = client.bots_list()
 
-
 Get the code
--------------
+------------
 
 The `source <https://github.com/chatfirst/chatfirst>`_ is available on Github.
 
