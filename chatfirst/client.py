@@ -2,6 +2,8 @@ from chatfirst import ChatfirstClient
 from chatfirst.models import Bot, Channel, ActionResponse
 
 
+__author__ = 'it@chatfirst.co (Ivan Tertychnyy)'
+
 class Chatfirst:
     """
     The Chatfirst class is a wrapper of `Chatfirst API <https://api.chatfirst.co>`_

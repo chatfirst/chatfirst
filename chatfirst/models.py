@@ -28,6 +28,10 @@ class ActionResponse(object):
         #: list of LinkedEntity objects
         self.entities = [LinkedEntity(item) for item in data['Entities']] if 'Entities' in data.keys() else []
 
+        #: data["ForcedMessage"],
+        #: Context message
+        self.forced_message = data['ForcedMessage'] if 'ForcedMessage' in data.keys() else None
+
     def to_json(self):
         """
         Serialize object to json dict
@@ -42,6 +46,7 @@ class ActionResponse(object):
         res['Entities'] = list()
         for item in self.entities:
             res['Entities'].append(item.to_json())
+        res['ForcedMessage'] = self.forced_message
         return res
 
 

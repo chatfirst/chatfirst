@@ -1,7 +1,7 @@
 from setuptools import setup
 setup(
   name='chatfirst',
-  version='0.1.0a',
+  version='0.2',
   description='Chatfirst Python Client',
   author='Ivan Tertychnyy',
   author_email='it@chatfirst.co',
